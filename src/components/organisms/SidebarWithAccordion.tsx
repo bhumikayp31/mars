@@ -38,7 +38,7 @@ export const SidebarWithAccordion = ({ isOpen, setIsOpen }: SidebarProps) => {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      {/* BLUE RAIL (Always on left) */}
+      {/* BLUE RAIL (Always on left)-->the constant strip   */}
       <Box sx={{ 
         width: 48, 
         bgcolor: '#1976D2', 
@@ -59,8 +59,8 @@ export const SidebarWithAccordion = ({ isOpen, setIsOpen }: SidebarProps) => {
         
         {/* HOME ICON - Opens the drawer */}
         <IconButton 
-          onClick={() => setIsOpen(true)} 
-          sx={{ color: 'white', p: 0.5, bgcolor: isOpen ? 'rgba(255,255,255,0.1)' : 'transparent' }}
+          onClick={() => setIsOpen(!isOpen)}
+          sx={{ color: 'white', p: 0.5, bgcolor: isOpen ? 'rgba(255,255,255,0.1)' : 'transparent' ,visibility: 'visible' }}
         >
           <HomeIcon sx={{ fontSize: 20 }} />
         </IconButton>
@@ -68,7 +68,7 @@ export const SidebarWithAccordion = ({ isOpen, setIsOpen }: SidebarProps) => {
 
       {/* DRAWER MENU */}
       <Drawer
-        variant="persistent"
+        variant="persistent" // this is to pushes rest screen 
         open={isOpen}
         sx={{ 
           '& .MuiDrawer-paper': { 
@@ -99,11 +99,11 @@ export const SidebarWithAccordion = ({ isOpen, setIsOpen }: SidebarProps) => {
 
         {/* MIDDLE SECTION (The only scrollable part) */}
         <Box sx={{ 
-          flexGrow: 1, 
+          flexGrow: 1, //box to take available speace b/w header and footer 
           overflowY: 'auto', 
           px: 1,
           mt: 1,
-          // Custom Thin Scrollbar to match original photo
+          // Custom Thin Scrollbar look thin 
           '&::-webkit-scrollbar': {
             width: '6px',
           },
@@ -129,11 +129,11 @@ export const SidebarWithAccordion = ({ isOpen, setIsOpen }: SidebarProps) => {
                     primary={item.label} 
                     primaryTypographyProps={{ fontSize: '11px', fontWeight: 700, color: '#555' }} 
                   />
-                  <AddIcon sx={{ fontSize: 13, color: '#999' }} />
+                  <AddIcon sx={{ fontSize: 13, color: '#999' }} /> {/*+ icon */}
                 </ListItemButton>
                 
                 {item.subItems && (
-                  <Collapse in={openSection === item.id} timeout="auto" unmountOnExit>
+                  <Collapse in={openSection === item.id} timeout="auto" unmountOnExit> {/* animation to close , open is matched or not with id if not hide */}
                     <List disablePadding>
                       {item.subItems.map((sub) => (
                         <ListItemButton 
